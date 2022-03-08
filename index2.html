@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <td>Nhập vào chiều dài(px): </td>
+        <td><input type="number" id="width"></td>
+    </tr>
+    <tr>
+        <td>Nhập vào chiều rộng(px): </td>
+        <td><input type="number" id="height"></td>
+    </tr>
+    <tr>
+        <td>Area of Rectangle: </td>
+        <td><h1 id="area"></h1></td>
+    </tr>
+    <tr>
+        <td>Perimeter of Rectangle: </td>
+        <td><h1 id="perimeter"></h1></td>
+    </tr>
+    <tr>
+        <td>
+            <button  onclick="showResult()">Show Result</button>
+        </td>
+        <td >
+            <button   onclick="reset()">Reset</button>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <canvas id="myCanvas" width="1050px" height="400px" style="border: 2px solid royalblue"></canvas>
+        </td>
+    </tr>
+</table>
+</body>
+<script>
+    class Rectangle {
+        constructor(width, height) {
+            this.widht = width;
+            this.height = height;
+        }
+        setWidth(width){
+            this.widht = width;
+        }
+        getWidth(){
+            return this.widht;
+        }
+        setHeight(height){
+            this.height = height;
+        }
+        getHeight(){
+            return this.height;
+        }
+        getArea(){
+            return this.widht*this.height;
+        }
+        getPerimeter(){
+            return (this.widht+this.height)*2
+        }
+    }
+
+    function showResult() {
+        let width =  document.getElementById('width').value;
+        width=parseInt(width);
+        let height = document.getElementById('height').value;
+        height=parseInt(height);
+        let rectangle = new Rectangle(width, height);
+        let area = rectangle.getArea();
+        let perimeter = rectangle.getPerimeter();
+        document.getElementById('area').innerHTML = area;
+        document.getElementById('perimeter').innerHTML = perimeter;
+        let canvas = document.getElementById('myCanvas');
+        let ctx = canvas.getContext('2d');
+        ctx.beginPath();
+        ctx.fillStyle = 'green';
+        ctx.fillRect(0,0,width,height);
+        ctx.stroke();
+    }
+    function reset() {
+        document.getElementById('width').value = '';
+        document.getElementById('height').value = '';
+        document.getElementById('area').innerHTML = '';
+        document.getElementById('perimeter').innerHTML = '';
+        let canvas = document.getElementById('myCanvas');
+        let ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+</script>
+</html>
